@@ -1,22 +1,22 @@
 import numpy as np
-import sys
-import scipy.stats as sps
-
-n = 10
-m = 5
-X = np.arange(n*m,dtype="float").reshape(n,m)#np.random.rand(n,m)
 
 def zcore(X):
+    '''Calcula el zcore de un dataset
+       Recibe un dataset X y devulve el dataset aplicando la media a cada columna y dividiendo por el desvio standar 
+    '''
     mediaColumnas = np.nanmean(X,axis=0,keepdims=True) 
     stdColumnas = np.nanstd(X,axis=0,keepdims=True)
-    #print(f"La media es {mediaColumnas} y la varianza es {stdColumnas}")
-    
-    #cada columna = columna - media / std
-    #print("X: ",X)
-    #print("media: ",mediaColumnas)
-    #print("X - media: ",(X - mediaColumnas))
     resultado = (X - mediaColumnas) / stdColumnas
     return resultado
-    #print("Resultado: ",resultado)
-    
-zcore(X)    
+
+#################################
+# Prubeas unitarias del ejercicio
+
+if __name__ == '__main__':
+    n = 10
+    m = 5
+    dataset = np.arange(n*m,dtype="float").reshape(n,m)
+    dataset_normalizado = zcore(dataset)    
+    print("Dataset original:\n",dataset)
+    print("\nDataset noralizado:\n",dataset_normalizado)
+
